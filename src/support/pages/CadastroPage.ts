@@ -15,40 +15,25 @@ export default class CadastroPage extends BasePage {
   async preencherFormulario(): Promise<void> {
     await this.cadastroElements.getBotaoNovoCadastro().click();
     await this.cadastroElements.getCampoNome().fill(faker.person.firstName());
-    await this.cadastroElements.getCampoCpf().fill('33223745050');
-    await this.cadastroElements.getCampoEmail().fill('a@b.com.br');
-    await this.cadastroElements.getCampoWhatsapp().fill('48 999998888');
-    await this.cadastroElements.getCampoCep().fill('88817070');
-    await this.cadastroElements.getBotaoBuscarCep().click();
-    await this.cadastroElements.getCampoNumero().fill('10');
-    await this.cadastroElements.getCampoComplemento().fill(faker.word.words());
-    await this.cadastroElements.getCampoMetodoEntrega().click();
     await this.cadastroElements
-      .getCampoAnexo()
-      .setInputFiles('src/support/fixtures/cnh_testes.jpg');
+      .getCampoSobrenome()
+      .fill(faker.person.lastName());
+    await this.cadastroElements.getCampoSenha().fill('SenhaTeste123');
+    await this.cadastroElements.getCampoEmail().fill(faker.internet.email());
+    await this.cadastroElements.getCheckBox().click();
     await this.cadastroElements.getBotaoCadastrar().click();
   }
 
   async preencherFormularioInvalido(): Promise<void> {
     await this.cadastroElements.getBotaoNovoCadastro().click();
-    await this.cadastroElements.getCampoNome().fill(faker.person.firstName());
-    await this.cadastroElements.getCampoCpf().fill('33223745050');
-    await this.cadastroElements.getCampoEmail().fill('a@b.com.br');
-    await this.cadastroElements.getCampoWhatsapp().fill('48 999998888');
-    await this.cadastroElements.getCampoCep().fill('88817070');
-    await this.cadastroElements.getBotaoBuscarCep().click();
-    await this.cadastroElements.getCampoNumero().fill('10');
-    await this.cadastroElements.getCampoComplemento().fill(faker.word.words());
-    await this.cadastroElements.getCampoMetodoEntrega().click();
-    await this.cadastroElements.getBotaoCadastrar().click();
   }
 
-  async validarCadastro(): Promise<void> {
-    await expect(this.cadastroElements.getMessageOK()).toBeVisible();
+  async validarCadastroIncorreto(): Promise<void> {
+    await expect(this.cadastroElements.getCadastroIncorreto()).toBeVisible();
   }
 
-  async validarCNH(): Promise<void> {
-    await expect(this.cadastroElements.getValidarCNH()).toBeVisible();
+  async vaiAoCadastro(): Promise<void> {
+    await this.cadastroElements.getBotaoSignup().click();
   }
 
   async validarCarrinho(): Promise<void> {
