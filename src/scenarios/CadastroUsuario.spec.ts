@@ -25,7 +25,7 @@ test.describe('Cadastro de usuário', () => {
     expect(page.url()).toContain('collections');
   });
 
-  test('Preencher formulário de cadastro com dados inválidos', async () => {
+  test('Preencher um formulário de cadastro com dados inválidos', async () => {
     await cadastroPage.preencherFormularioInvalido();
     await cadastroPage.validarCadastroIncorreto();
   });
